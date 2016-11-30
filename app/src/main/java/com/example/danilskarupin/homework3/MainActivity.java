@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.BroadcastReceiver;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
         imgView = (ImageView) findViewById(R.id.image);
         textView = (TextView) findViewById(R.id.text);
 
+        showImage();
+
         actReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                context.startService(new Intent(context, LoadService.class));
+                    Log.d(TAG, "Download Requested");
+                    context.startService(new Intent(context, LoadService.class));
             }
         };
 
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        registerReceiver(actReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
+        registerReceiver(actReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         registerReceiver(receiver, new IntentFilter(LOADING_ENDED));
     }
 
@@ -66,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(receiver);
     }
 
+    private final String TAG = "MainActivity";
 }
