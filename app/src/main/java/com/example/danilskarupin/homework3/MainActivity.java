@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final String LOADING_ENDED = "LOADSERVICE_IMAGELOADED";
 
-    static final String imagePath = "/image.png";
+    static final String imageName = "/image.png";
 
     ImageView imgView;
     TextView textView;
@@ -54,13 +54,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showImage() {
-        File f = new File(getFilesDir().getAbsolutePath() + imagePath);
-        if (f.exists()) {
-            imgView.setVisibility(View.VISIBLE);
-            textView.setVisibility(View.GONE);
-            imgView.setImageBitmap(BitmapFactory.decodeFile(f.getPath()));
+        if (LoadService.lastLoadWasGood) {
+            File f = new File(getFilesDir().getAbsolutePath() + imageName);
+            if (f.exists()) {
+                imgView.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.GONE);
+                imgView.setImageBitmap(BitmapFactory.decodeFile(f.getPath()));
+            }
+        } else {
+            imgView.setVisibility(View.GONE);
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(R.string.load_went_wrong);
         }
-
     }
 
     @Override

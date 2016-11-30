@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">homework3</string>
-    <string name="notloaded">Nothing is loaded</string>
+    <string name="not_loaded">Nothing is loaded</string>
+    <string name="load_went_wrong">Last load went wrong</string>
 </resources>
