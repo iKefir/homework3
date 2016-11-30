@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         actReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                    Log.d(TAG, "Download Requested");
-                    context.startService(new Intent(context, LoadService.class));
+                Log.d(TAG, "Download Requested");
+                context.startService(new Intent(context, LoadService.class));
             }
         };
 
